@@ -1,0 +1,223 @@
+/* =========================================
+   1. Base & Reset (ตั้งค่าเริ่มต้น)
+   ========================================= */
+* { 
+  box-sizing: border-box; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fb; 
+  color: #202124; 
+}
+
+/* =========================================
+   2. Layout Container (โครงสร้างหลัก)
+   ========================================= */
+.app { 
+  min-height: 100vh; 
+}
+
+.main-content { 
+  max-width: 1100px; 
+  margin: 32px auto;
+  padding: 0 20px; 
+  display: grid; 
+  gap: 28px; 
+}
+
+.section { 
+  background-color: white; 
+  padding: 28px;
+  border-radius: 18px; 
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07); 
+}
+
+/* =========================================
+   3. Header & Footer (ส่วนหัวและส่วนท้าย)
+   ========================================= */
+.header { 
+  background: linear-gradient(135deg, #4285f4, #34a853); 
+  color: white; 
+  text-align: center; 
+  padding: 48px 20px; 
+}
+
+.header h1 { 
+  margin: 0; 
+  font-size: 36px; 
+}
+
+.header p { 
+  margin: 10px 0 0; 
+  font-size: 18px; 
+}
+
+.subtitle { 
+  font-size: 16px; 
+  opacity: 0.9; 
+}
+
+.footer { 
+  background-color: #202124; 
+  color: white;
+  text-align: center; 
+  padding: 24px 16px; 
+}
+
+.footer p { 
+  margin: 6px 0; 
+}
+
+/* =========================================
+   4. Section Titles (หัวข้อแต่ละส่วน)
+   ========================================= */
+.section-title { 
+  margin-bottom: 20px; 
+}
+
+.section-title h2 { 
+  color: #4285f4; 
+  margin: 0; 
+}
+
+.section-title p { 
+  color: #5f6368; 
+  margin: 8px 0 0; 
+}
+
+/* =========================================
+   5. Course Card (การ์ดรายวิชา)
+   ========================================= */
+.course-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+}
+
+.course-card { 
+  border: 1px solid #e0e0e0; 
+  border-left: 6px solid #4285f4; 
+  border-radius: 14px; 
+  padding: 20px; 
+  background-color: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+.course-card:hover { 
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); 
+}
+
+.course-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.course-header h3 { 
+  color: #4285f4; 
+  margin: 0; 
+}
+
+.course-card h4 { 
+  margin: 14px 0 6px; 
+  font-size: 18px; 
+}
+
+.english-name { 
+  color: #5f6368; 
+  font-style: italic; 
+}
+
+.course-meta { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px;
+  margin-top: 14px; 
+}
+
+.course-meta span { 
+  background-color: #f1f3f4; 
+  padding: 8px 10px; 
+  border-radius: 8px; 
+  font-size: 14px; 
+}
+
+.empty-message { 
+  background-color: #fce8e6; 
+  color: #a50e0e; 
+  padding: 14px; 
+  border-radius: 10px; 
+}
+
+/* =========================================
+   6. Badges & Tools (ป้ายกำกับและเครื่องมือ)
+   ========================================= */
+.badge { 
+  padding: 6px 10px; 
+  border-radius: 999px;
+  font-size: 13px; 
+  font-weight: bold; 
+}
+
+.core { 
+  background-color: #e6f4ea; 
+  color: #137333; 
+}
+
+.tool-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+}
+
+.tool-badge { 
+  padding: 12px 18px; 
+  border-radius: 999px;
+  font-weight: bold; 
+}
+
+/* สีเฉพาะหมวดหมู่ของ Tool */
+.frontend { background-color: #e8f0fe; color: #174ea6; }
+.backend { background-color: #e6f4ea; color: #137333; }
+.tool { background-color: #fef7e0; color: #b06000; }
+
+/* =========================================
+   7. Responsive (สำหรับหน้าจอมือถือ/แท็บเล็ต)
+   ========================================= */
+@media (max-width: 768px) { 
+  .header h1 { 
+    font-size: 28px;
+  }
+  
+  .main-content { 
+    margin: 20px auto; 
+    padding: 0 12px; 
+  }
+  
+  .section { 
+    padding: 20px; 
+  }
+  
+  .course-grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .course-header { 
+    align-items: flex-start; 
+    flex-direction: column; 
+  } 
+}
+/* เพิ่ม Hover Effect ให้กับ ToolBadge */
+.tool-badge {
+  transition: all 0.3s ease; /* ทำให้เวลาชี้เมาส์แล้วดูนุ่มนวล */
+}
+
+.tool-badge:hover {
+  transform: translateY(-5px) scale(1.1); /* ขยับเด้งขึ้นและขยายขนาดนิดหน่อย */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+  cursor: pointer;
+}
