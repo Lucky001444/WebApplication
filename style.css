@@ -153,4 +153,15 @@ footer {
   color: white;
   padding: 20px;
 }
-
+/* เพิ่มเติม: ปรับสีและ Font ให้สวยงามขึ้น */
+body {
+  font-family: 'Kanit', 'Tahoma', sans-serif;
+}
+h2 {
+  color: #0056b3;
+}
+#register {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}

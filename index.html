@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 3: Basic Web Development</title>
   <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
 
@@ -66,6 +67,17 @@
             <td>HTML, CSS และ JavaScript</td>
             <td>สร้างเว็บเพจพื้นฐาน</td>
           </tr>
+          <!-- จุดที่แก้ไขข้อ 1: เพิ่มตารางแผนการเรียนมากกว่า 3 สัปดาห์ -->
+          <tr>
+            <td>4</td>
+            <td>React Components</td>
+            <td>การสร้าง Component พื้นฐาน</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>React State & Props</td>
+            <td>จัดการข้อมูลในแอปพลิเคชัน</td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -75,13 +87,14 @@
 
       <form id="interestForm">
         <label for="studentName">ชื่อ - สกุล</label>
-        <input type="text" id="studentName" placeholder="กรอกชื่อ - สกุล">
+        <input type="text" id="studentName" placeholder="กรอกชื่อ - สกุล" required>
 
         <label for="studentId">รหัสนักศึกษา</label>
-        <input type="text" id="studentId" placeholder="กรอกรหัสนักศึกษา">
+        <!-- จุดที่แก้ไขข้อ 2: เพิ่มการตรวจสอบความยาวรหัสนักศึกษา (จำกัดที่ 11 หลัก) -->
+        <input type="text" id="studentId" placeholder="กรอกรหัสนักศึกษา 11 หลัก" minlength="11" maxlength="11" required>
 
         <label for="interestTopic">หัวข้อที่สนใจ</label>
-        <select id="interestTopic">
+        <select id="interestTopic" required>
           <option value="">-- เลือกหัวข้อ --</option>
           <option value="HTML">HTML</option>
           <option value="CSS">CSS</option>
