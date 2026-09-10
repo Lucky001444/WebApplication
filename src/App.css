@@ -1,0 +1,152 @@
+* { box-sizing: border-box; }
+:root { 
+  --blue: #4285f4; 
+  --green: #34a853; 
+  --yellow: #fbbc05;
+  --red: #ea4335; 
+  --dark: #202124; 
+  --gray: #5f6368; 
+  --light: #f8f9fa; 
+  --border: #dadce0; 
+  --white: #ffffff;
+  --bg-body: #f5f7fb;
+}
+
+/* 🌙 กำหนดค่าสีเมื่อเปิดใช้งาน Dark Mode */
+[data-theme="dark"] {
+  --dark: #121212;
+  --light: #1e1e1e;
+  --white: #1e1e1e;
+  --gray: #a0a3a7;
+  --border: #333333;
+  --bg-body: #0d0d0d;
+  --white: #1a1a1a;
+}
+
+[data-theme="dark"] body {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .section, 
+[data-theme="dark"] .search-box, 
+[data-theme="dark"] .course-card, 
+[data-theme="dark"] .stat-card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333333;
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] select {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border-color: #444444;
+}
+
+[data-theme="dark"] tr:nth-child(even) td {
+  background-color: #252525;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Arial, sans-serif; background-color: var(--bg-body); color: var(--dark); line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
+.app { min-height: 100vh; }
+
+.header { 
+  background: linear-gradient(135deg, var(--blue), var(--green)); 
+  color: #ffffff; 
+  padding: 56px 20px; 
+  text-align: center; 
+}
+.header-content { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.eyebrow { margin: 0 0 10px; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; }
+.header h1 { margin: 0; font-size: clamp(32px, 5vw, 52px); line-height: 1.15; }
+.subtitle { max-width: 720px; font-size: 18px; margin: 16px 0 0; opacity: 0.95; }
+
+/* Navbar ปรับให้มีปุ่ม Dark Mode อยู่ด้านขวาหรือจัดเรียงสวยงาม */
+.navbar { position: sticky; top: 0; z-index: 10; background-color: var(--dark); display: flex; justify-content: space-between; align-items: center; padding: 10px 24px; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.nav-links { display: flex; gap: 8px; overflow-x: auto; }
+.navbar a { color: #ffffff; text-decoration: none; font-weight: bold; padding: 10px 14px; border-radius: 999px; white-space: nowrap; transition: 0.3s; }
+.navbar a:hover { background-color: rgba(255, 255, 255, 0.12); color: var(--yellow); }
+
+.dark-mode-toggle { background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 14px; border-radius: 999px; cursor: pointer; font-weight: bold; white-space: nowrap; transition: 0.2s; }
+.dark-mode-toggle:hover { background-color: rgba(255, 255, 255, 0.25); }
+
+.main-content { width: min(1100px, calc(100% - 32px)); margin: 32px auto; display: grid; gap: 28px; }
+.section, .search-box { background-color: var(--white); border-radius: 22px; padding: 28px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07); transition: background-color 0.3s, border-color 0.3s; }
+.section-heading { margin-bottom: 22px; }
+.section-heading h2, .search-box h2 { margin: 0; color: var(--blue); font-size: 28px; }
+.section-heading p, .search-box p { margin: 8px 0 0; color: var(--gray); }
+
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.stat-card { border-top: 6px solid var(--blue); background-color: var(--light); border-radius: 18px; padding: 22px; transition: transform 0.2s, background-color 0.3s; }
+.stat-card:hover { transform: translateY(-3px); }
+.stat-card h3 { margin: 0; font-size: 36px; color: var(--blue); display: flex; align-items: center; gap: 8px;}
+.stat-title { margin: 8px 0 4px; font-weight: bold; }
+.stat-description { color: var(--gray); margin: 0; font-size: 14px; }
+
+.search-box { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; border-left: 6px solid var(--green); }
+.search-controls { display: flex; gap: 12px; align-items: center; width: 100%; justify-content: flex-end;}
+.search-box input, .search-box select { padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; min-width: 200px; transition: background-color 0.3s, color 0.3s; }
+.search-box input { flex-grow: 1; max-width: 400px; }
+.search-box input:focus, .search-box select:focus { outline: 3px solid rgba(66, 133, 244, 0.25); border-color: var(--blue); }
+.clear-btn { background-color: var(--red); color: #ffffff; border: none; padding: 14px 20px; border-radius: 12px; cursor: pointer; font-weight: bold; }
+.clear-btn:hover { background-color: #c5221f; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.course-card { 
+  border: 1px solid var(--border); border-radius: 18px; padding: 20px; background-color: var(--white); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s; 
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+.course-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08); }
+.course-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.course-code { color: var(--blue); font-weight: bold; }
+.level-badge { padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: bold; }
+.beginner { background-color: #e8f0fe; color: #174ea6; }
+.intermediate { background-color: #fef7e0; color: #b06000; }
+.advanced { background-color: #fce8e6; color: #a50e0e; }
+.course-card h3 { margin: 16px 0 8px; font-size: 20px; }
+.course-description { color: var(--gray); margin: 0; }
+.course-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.course-meta span { background-color: var(--light); padding: 8px 10px; border-radius: 10px; font-size: 14px; }
+
+.empty-message { background-color: var(--light); color: var(--gray); padding: 16px; border-radius: 12px; border: 1px dashed var(--border); }
+.table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { padding: 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background-color: var(--blue); color: #ffffff; }
+tr:nth-child(even) td { background-color: var(--light); }
+
+.footer { background-color: var(--dark); color: #ffffff; text-align: center; padding: 26px 16px; }
+.footer p { margin: 6px 0; }
+
+@media (max-width: 1024px) { 
+  .stat-grid, .course-grid { grid-template-columns: repeat(2, 1fr); }
+  .search-box { grid-template-columns: 1fr; } 
+  .search-controls { justify-content: flex-start; }
+}
+@media (max-width: 640px) { 
+  .header { padding: 40px 16px; }
+  .navbar { flex-direction: column; gap: 10px; padding: 12px; }
+  .nav-links { width: 100%; justify-content: flex-start; }
+  .dark-mode-toggle { width: 100%; }
+  .main-content { width: min(100% - 24px, 1100px); margin: 24px auto; gap: 22px; }
+  .section, .search-box { padding: 20px; border-radius: 18px; }
+  .section-heading h2, .search-box h2 { font-size: 24px; }
+  .stat-grid, .course-grid { grid-template-columns: 1fr; }
+  .stat-card h3 { font-size: 32px; }
+  .search-controls { flex-direction: column; width: 100%; align-items: stretch; }
+  .search-box input, .search-box select { width: 100%; max-width: none; }
+  .course-top { align-items: flex-start; flex-direction: column; } 
+}
