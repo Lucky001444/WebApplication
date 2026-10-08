@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-space: #050810;
+  --card-glass: rgba(10, 15, 30, 0.75);
+  --primary-neon: #00f0ff;
+  --primary-hover: #00c3ff;
+  --text-main: #f8fafc;
+  --text-muted: #64748b;
+  --border-neon: rgba(0, 240, 255, 0.25);
+  --success-neon: #10b981;
+  --warning-neon: #fbbf24;
+  --danger-neon: #ef4444;
+  --radius: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, var(--bg-space));
+  color: var(--text-main);
+  padding: 40px 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 🌟 ลูกเล่นใหม่: เส้นสแกนหน้าจอโฮโลแกรม (Scanlines) */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 999;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 🌟 ลูกเล่นใหม่: เอฟเฟกต์หน้าจอกระพริบ (Flicker) */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: auto;
+  animation: fadeIn 0.8s ease-out, screenFlicker 0.15s infinite;
+}
+
+/* 🌟 ลูกเล่นใหม่: Glitch Effect สำหรับหัวข้อ */
+.glitch-wrapper {
+  position: relative;
+  text-align: center;
+  margin-bottom: 35px;
+}
+.glitch-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary-neon);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  position: relative;
+  display: inline-block;
+}
+.glitch-text::before, .glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg-space);
+}
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--danger-neon);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--primary-neon);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.glow-cursor {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  filter: blur(30px);
+}
+
+.stat-card, .form-card, .table-card {
+  background: var(--card-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* เส้นแสงวิ่งขอบการ์ด */
+.stat-card::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: conic-gradient(transparent, transparent, transparent, var(--primary-neon));
+  animation: borderRotate 4s linear infinite;
+  opacity: 0; transition: opacity 0.3s;
+}
+.stat-card::after {
+  content: ''; position: absolute; inset: 2px; background: var(--card-glass); border-radius: calc(var(--radius) - 2px); z-index: -1;
+}
+.stat-card:hover::before { opacity: 1; }
+.stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2); }
+
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
+.stat-card h3 { margin: 0; font-size: 36px; font-family: 'Share Tech Mono', monospace; color: var(--primary-neon); text-shadow: 0 0 15px rgba(0, 240, 255, 0.6); position: relative; z-index: 1;}
+.stat-card p { position: relative; z-index: 1; margin: 5px 0 0; color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;}
+
+.form-group { display: flex; flex-direction: column; gap: 16px; }
+input, textarea, select {
+  padding: 14px 18px; border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 8px; font-size: 15px;
+  font-family: 'Kanit', sans-serif; background: rgba(0, 0, 0, 0.5); color: #fff; transition: all 0.3s ease;
+}
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-neon); box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2), 0 0 15px rgba(0, 240, 255, 0.3); background: rgba(0, 240, 255, 0.05); }
+select option { background: var(--bg-space); color: #fff; }
+
+button {
+  padding: 14px 20px; background: transparent; color: var(--primary-neon); border: 1px solid var(--primary-neon);
+  border-radius: 8px; font-weight: 600; font-size: 15px; font-family: 'Kanit', sans-serif; cursor: pointer; transition: all 0.3s ease;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+button:hover { background: var(--primary-neon); color: #000; box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); transform: scale(1.02); }
+.btn-export { border-color: var(--success-neon); color: var(--success-neon); }
+.btn-export:hover { background: var(--success-neon); box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
+.btn-danger { border-color: var(--danger-neon); color: var(--danger-neon); padding: 8px 14px; }
+.btn-danger:hover { background: var(--danger-neon); box-shadow: 0 0 15px rgba(239, 68, 68, 0.6); }
+.btn-success { border-color: var(--warning-neon); color: var(--warning-neon); padding: 8px 14px; }
+.btn-success:hover { background: var(--warning-neon); box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
+
+.toolbar { display: flex; gap: 15px; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.search-box { flex: 1; min-width: 250px; }
+.filter-select { width: 200px; }
+.table-wrapper { overflow-x: auto; }
+
+table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+th, td { padding: 16px; text-align: left; }
+th { color: var(--primary-neon); font-family: 'Share Tech Mono', monospace; font-size: 14px; border-bottom: 1px solid var(--border-neon); }
+tbody tr { background: rgba(0, 240, 255, 0.02); transition: all 0.3s ease; border: 1px solid transparent; }
+tbody tr:hover { background: rgba(0, 240, 255, 0.08); transform: translateX(5px); box-shadow: -5px 0 0 var(--primary-neon); }
+td:first-child { border-radius: 8px 0 0 8px; font-family: 'Share Tech Mono', monospace; color: var(--text-muted); }
+td:last-child { border-radius: 0 8px 8px 0; }
+
+.timestamp { font-family: 'Share Tech Mono', monospace; color: var(--text-muted); font-size: 12px; }
+
+.badge { display: inline-block; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
+.badge-pending { background: rgba(239, 68, 68, 0.1); color: var(--danger-neon); border: 1px solid var(--danger-neon); }
+.badge-repairing { background: rgba(251, 191, 36, 0.1); color: var(--warning-neon); border: 1px solid var(--warning-neon); animation: pulseWarning 1.5s infinite; }
+.badge-completed { background: rgba(16, 185, 129, 0.1); color: var(--success-neon); border: 1px solid var(--success-neon); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes borderRotate { 100% { transform: rotate(360deg); } }
+@keyframes screenFlicker { 0% { opacity: 0.98; } 50% { opacity: 1; } 100% { opacity: 0.99; } }
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 81px, 0); transform: skew(0.65deg); }
+  20% { clip: rect(61px, 9999px, 20px, 0); transform: skew(0.88deg); }
+  40% { clip: rect(31px, 9999px, 98px, 0); transform: skew(0.53deg); }
+  60% { clip: rect(72px, 9999px, 14px, 0); transform: skew(0.12deg); }
+  80% { clip: rect(12px, 9999px, 59px, 0); transform: skew(0.85deg); }
+  100% { clip: rect(96px, 9999px, 43px, 0); transform: skew(0.35deg); }
+}
+@keyframes pulseWarning { 0% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); } 50% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); } 100% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); } }
+
+.spinner { width: 40px; height: 40px; border: 3px solid rgba(0, 240, 255, 0.1); border-top-color: var(--primary-neon); border-radius: 50%; animation: spin 1s linear infinite; margin: 40px auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 🌟 Cyber Popup Modal (หน้าต่างแจ้งเตือนกลางจอ) */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+.modal-content {
+  background: var(--bg-space);
+  border: 1px solid var(--primary-neon);
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+}
+.modal-content.success {
+  border-color: var(--success-neon);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+}
+.modal-content.danger {
+  border-color: var(--danger-neon);
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+}
+.modal-content h3 {
+  margin-top: 0;
+  font-family: 'Share Tech Mono', monospace;
+}
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* 🌟 ระบบสลับโหมดสว่าง (Light Mode / Cyberprep Style) */
+body.light-mode {
+  --bg-space: #e2e8f0;
+  --card-glass: rgba(255, 255, 255, 0.7);
+  --primary-neon: #0284c7; /* สีฟ้าเข้มขึ้นเพื่อให้อ่านง่ายบนพื้นสว่าง */
+  --primary-hover: #0369a1;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-neon: rgba(2, 132, 199, 0.4);
+  background: radial-gradient(circle at top, #f8fafc, var(--bg-space));
+}
+
+/* ลดความเข้มของเส้นสแกนหน้าจอในโหมดสว่าง */
+body.light-mode::before {
+  opacity: 0.15; 
+}
+
+/* ปรับสีช่องกรอกข้อมูลในโหมดสว่าง */
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-main);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+body.light-mode select option {
+  background: #f8fafc;
+  color: var(--text-main);
+}
+
+/* ปรับเอฟเฟกต์ Glitch ให้เข้ากับพื้นหลังสีสว่าง */
+body.light-mode .glitch-text {
+  text-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
+}
+body.light-mode .glitch-text::before,
+body.light-mode .glitch-text::after {
+  background: transparent;
+}
+
+/* 🌟 ปุ่มสลับโหมด (Theme Toggle Button) */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+  padding: 10px 16px;
+  background: var(--card-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+body.light-mode .theme-toggle-btn {
+  box-shadow: 0 0 15px rgba(2, 132, 199, 0.2);
+}
+
+/* 🌟 ปรับแก้สีตัวหนังสือ หัวข้อ และตารางให้เป็นสีเข้มในโหมดสว่าง */
+body.light-mode h2,
+body.light-mode h3 {
+  color: #0f172a; /* เปลี่ยนหัวข้อทั้งหมดเป็นสีดำเข้ม */
+  text-shadow: none; /* ปิดเอฟเฟกต์เงาเรืองแสงที่ทำให้ตัวหนังสือเบลอ */
+}
+
+body.light-mode th {
+  color: #0369a1; /* เปลี่ยนหัวตารางเป็นสีฟ้าเข้ม */
+  border-bottom-color: rgba(2, 132, 199, 0.3);
+}
+
+body.light-mode td,
+body.light-mode td:first-child,
+body.light-mode .timestamp {
+  color: #1e293b; /* เปลี่ยนข้อความในตารางเป็นสีดำเข้ม */
+  text-shadow: none;
+}
+
+body.light-mode .badge {
+  font-weight: 700; /* เพิ่มความหนาให้ป้ายสถานะอ่านง่ายขึ้น */
+}
+
+body.light-mode .stat-card p {
+  color: #334155; /* ปรับตัวหนังสืออธิบายสถิติให้เข้มขึ้น */
+}
